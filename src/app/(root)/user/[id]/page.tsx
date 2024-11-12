@@ -3,7 +3,7 @@ import UserCard from "@/components/UserCard";
 import { client } from "@/sanity/lib/client";
 import { notFound } from "next/navigation";
 import { AUTHOR_BY_ID_QUERY } from "@/sanity/lib/queries";
-import StartupCardList from "@/components/StartupCardList";
+import ProfilePosts from "@/components/ProfilePosts";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -12,7 +12,6 @@ interface Props {
 const Profile = async ({ params }: Props) => {
   const id = (await params).id;
   const user = await client.fetch(AUTHOR_BY_ID_QUERY, { id });
-  console.log(user);
 
   if (!user) return notFound();
 
@@ -22,7 +21,7 @@ const Profile = async ({ params }: Props) => {
         <UserCard user={user} />
 
         <Suspense fallback={<p className="animate-pulse">Loading...</p>}>
-          <StartupCardList isProfile userId={id} />
+          <ProfilePosts userId={id} />
         </Suspense>
       </div>
     </section>

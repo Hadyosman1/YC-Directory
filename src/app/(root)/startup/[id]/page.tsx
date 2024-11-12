@@ -14,8 +14,7 @@ import {
 import { formatDate } from "@/utils/helpers";
 
 import markdownit from "markdown-it";
-import StartupCardList from "@/components/StartupCardList";
-
+import StartupCard, { startupTypeCard } from "@/components/StartupCard";
 const md = markdownit();
 
 interface Props {
@@ -59,6 +58,7 @@ const StartupDetails = async ({ params }: Props) => {
       <section className="container py-12">
         <div className="mx-auto max-w-[1110px]">
           <Image
+            unoptimized
             src={post.image ?? ""}
             alt="thumbnail"
             className="aspect-video max-w-full rounded-[20px] object-cover shadow-md"
@@ -74,6 +74,7 @@ const StartupDetails = async ({ params }: Props) => {
               className="flex items-center gap-[14px]"
             >
               <Image
+                unoptimized
                 src={post.author.image ?? ""}
                 alt={"avatar"}
                 width={64}
@@ -117,7 +118,12 @@ const StartupDetails = async ({ params }: Props) => {
               <p className="mb-6 mt-12 text-3xl font-semibold leading-[35px]">
                 Editor picks
               </p>
-              <StartupCardList playListPosts={editorPosts} />
+
+              <div className="inline-grid grid-cols-[repeat(auto-fill,minmax(290px,1fr))] justify-center gap-x-4 gap-y-7 lg:justify-start">
+                {editorPosts.map((post: startupTypeCard) => (
+                  <StartupCard key={post._id} post={post} />
+                ))}
+              </div>
             </>
           )}
         </div>

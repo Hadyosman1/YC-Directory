@@ -27,6 +27,8 @@ const UserCard = async ({
       <div className="rounded-[30px] border-[5px] border-black bg-primary px-[22px] drop-shadow-[5px_6px_0_#000] transition-all">
         <div className="mt-[55px] flex flex-col items-center pb-[38px] text-white">
           <Image
+            unoptimized
+            priority
             src={user?.image ?? ""}
             alt="profile"
             width={220}
