@@ -8,28 +8,19 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
   color: var(--foreground);
   background: var(--background);
 }
 
-@layer base {
-  @media (min-width : 1440px) {
-    .container {
-      max-width: 1440px;
-    }
-  }
-}
-
 @layer components {
-  .heading {
-    @apply bg-secondary relative uppercase mb-4 rounded px-5 py-2.5 text-base font-bold ;
+  .yellow-p {
+    @apply relative mb-4 rounded bg-secondary px-5 py-2.5 text-base font-bold uppercase;
 
     .shape::after {
-     content: "";
+      content: "";
       width: 32px;
       height: 1px;
-      border:1px solid #fff;
+      border: 1px solid #fff;
       border-radius: 10px;
       position: absolute;
       bottom: -5px;
@@ -41,7 +32,7 @@ body {
     &::after {
       content: "";
       position: absolute;
-      border: 6px  solid;
+      border: 6px solid;
     }
 
     &::before {
@@ -57,18 +48,53 @@ body {
     }
   }
 
-  .sub-heading {
+  .heading {
     line-height: 1.6;
     font-size: 24px;
-    @apply max-w-[970px]  md:leading-[64px] md:text-[54px] mb-6 bg-black px-5 py-4 text-center font-black uppercase text-white;
+    @apply mb-6 max-w-[970px] break-words bg-black px-5 py-4 text-center font-black uppercase text-white md:text-[54px] md:leading-[64px];
   }
 
-  .section-paragraph {
-    @apply mb-8 text-center text-xl font-medium text-white;
+  .sub-heading {
+    @apply break-words text-center text-base font-medium text-white md:text-xl;
   }
 
   .search-input-icon {
-    @apply inline-grid text-white text-xl font-semibold hover:bg-black-200 hover:scale-105 transition-all aspect-square w-[40px] shrink-0 cursor-pointer place-content-center rounded-full bg-black md:w-[50px];
+    @apply inline-grid aspect-square w-[40px] shrink-0 cursor-pointer place-content-center rounded-full bg-black text-xl font-semibold text-white transition-all hover:scale-105 hover:bg-black-200 md:w-[50px];
+  }
+
+  .form-field-wrapper {
+    @apply flex flex-col gap-y-3;
+  }
+
+  .form-label {
+    @apply text-lg font-bold uppercase leading-[24px];
+  }
+
+  .form-input {
+    @apply rounded-[50px] border-[4px] border-black px-[18px] py-6 text-lg font-semibold leading-[21.5px] text-black placeholder:capitalize placeholder:text-black-300 focus:outline-none focus:ring-[2px] focus:ring-black;
+  }
+
+  .form-textarea {
+    @apply form-input h-[150px] resize-none rounded-[20px];
+  }
+
+  .form-error {
+    @apply -mt-1.5 break-all text-sm font-semibold text-red-500;
+  }
+
+  .form-submit-btn {
+    @apply w-full rounded-[60px] border-4 border-black bg-primary py-6 text-lg font-bold leading-[21.5px] text-white transition-all duration-300 [letter-spacing:0.5px] hover:scale-[1.02] hover:ring-[4px] hover:ring-black;
+
+    &:disabled {
+      @apply cursor-not-allowed opacity-50 hover:scale-100;
+    }
   }
 }
 
+@layer utilities {
+  @media (min-width: 1440px) {
+    .container {
+      max-width: 1440px;
+    }
+  }
+}

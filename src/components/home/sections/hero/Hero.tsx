@@ -1,26 +1,24 @@
 import SearchInput from "@/components/home/sections/hero/SearchInput";
-import MainSectionWrapper from "@/components/MainSectionWrapper";
+import PinkSection from "@/components/PinkSection";
 
-const Hero = () => {
+const Hero = ({ query }: { query: string }) => {
   return (
-    <MainSectionWrapper>
-      <div className={"container relative flex flex-col items-center md:px-8"}>
-        <h1 className={"heading"}>
-          <span className={"shape relative"}>Pitch, Vote And Grow</span>
-        </h1>
+    <PinkSection>
+      <p className={"yellow-p"}>
+        <span className={"shape relative"}>Pitch, Vote And Grow</span>
+      </p>
 
-        <h2 className={"sub-heading"}>
-          Pitch Your Startup,
-          <br /> Connect with Entrepreneurs
-        </h2>
+      <h1 className={"heading"}>
+        Pitch Your Startup,
+        <br /> Connect with Entrepreneurs
+      </h1>
 
-        <p className={"section-paragraph"}>
-          Submit Ideas, Vote on Pitches, and Get Noticed in Virtual Competitions
-        </p>
+      <p className={"sub-heading"}>
+        Submit Ideas, Vote on Pitches, and Get Noticed in Virtual Competitions
+      </p>
 
-        <SearchInput />
-      </div>
-    </MainSectionWrapper>
+      <SearchInput query={query} />
+    </PinkSection>
   );
 };
 export default Hero;

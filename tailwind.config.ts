@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+import tailwindCSSAnimate from "tailwindcss-animate";
+import tailwindCSSTypography from "@tailwindcss/typography";
 
 const config: Config = {
   darkMode: ["class"],
@@ -13,8 +15,16 @@ const config: Config = {
       container: {
         center: true,
         padding: {
-          DEFAULT: "1rem",
+          DEFAULT: "0.5rem",
+          sm: "1rem",
           md: "1.5rem",
+        },
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: "100ch",
+          },
         },
       },
       screens: {
@@ -52,7 +62,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [tailwindCSSAnimate, tailwindCSSTypography],
 };
 
 export default config;

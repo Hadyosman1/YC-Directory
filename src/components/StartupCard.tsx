@@ -3,12 +3,19 @@ import Image from "next/image";
 import Link from "next/link";
 import eyeIcon from "@/../public/eye-icon.svg";
 import { formatDate } from "@/utils/helpers";
+import { Author, Startup } from "@/sanity/types";
 
-const StartupCard = ({ post }) => {
+export type startupTypeCard = Omit<Startup, "author"> & { author?: Author };
+
+interface Props {
+  post: startupTypeCard;
+}
+
+const StartupCard = ({ post }: Props) => {
   const {
     _createdAt,
     views,
-    author: { _id: authorId, name },
+    author,
     _id,
     title,
     category,
@@ -16,12 +23,10 @@ const StartupCard = ({ post }) => {
     description,
   } = post;
 
+  const viewsAsString = `${views}`;
+
   return (
-    <article
-      className={
-        "group max-w-[320px] rounded-[22px] border-[5px] border-black bg-white px-[22px] py-8 drop-shadow-[4px_4px_0_#000] transition-all hover:-translate-y-0.5 hover:border-primary hover:bg-primary-100 hover:drop-shadow-[4px_4px_0_#EE2B69]"
-      }
-    >
+    <article className="group rounded-[22px] border-[5px] border-black bg-white px-4 py-8 drop-shadow-[4px_4px_0_#000] transition-all hover:border-primary hover:bg-primary-100 hover:drop-shadow-[4px_4px_0_#EE2B69] 2xl:px-[22px]">
       <div className={"mb-5 flex items-center justify-between"}>
         <p
           className={
@@ -40,7 +45,7 @@ const StartupCard = ({ post }) => {
             priority
           />
           <span className={"text-base font-medium [letter-spacing:-3%]"}>
-            {views}
+            {viewsAsString}
           </span>
         </div>
       </div>
@@ -48,12 +53,12 @@ const StartupCard = ({ post }) => {
       <div className={"mb-2.5 flex items-center justify-between"}>
         <div>
           <Link
-            href={`/user/${authorId}`}
+            href={`/user/${author?._id}`}
             className={
               "mb-1.5 line-clamp-1 text-base font-medium leading-[19px]"
             }
           >
-            {name}
+            {author?.name}
           </Link>
 
           <Link
@@ -65,10 +70,9 @@ const StartupCard = ({ post }) => {
             {title}
           </Link>
         </div>
-
-        <Link href={`/user/${authorId}`}>
+        <Link href={`/user/${author?._id}`}>
           <Image
-            src={`/test-startup.png`}
+            src={author?.image ?? ""}
             alt="author"
             width={40}
             height={40}
@@ -85,7 +89,7 @@ const StartupCard = ({ post }) => {
 
       <Image
         className={"mb-4 h-[164px] w-full rounded-[10px] border border-black"}
-        src={image}
+        src={image ?? ""}
         alt={"startup"}
         width={276}
         height={164}
@@ -93,11 +97,12 @@ const StartupCard = ({ post }) => {
 
       <div className={"flex items-center justify-between font-medium"}>
         <Link
-          href={`/?query=${category.toLowerCase()}`}
+          href={`/?query=${category?.toLowerCase()}`}
           className={"text-base leading-[19px] text-black hover:underline"}
         >
-          Senior Level
+          {category}
         </Link>
+
         <Link
           href={`/startup/${_id}`}
           className="rounded-[70px] border border-black bg-black px-5 py-2.5 text-base leading-[19px] text-white hover:underline"
